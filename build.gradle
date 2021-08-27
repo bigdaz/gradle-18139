@@ -1,0 +1,19 @@
+plugins {
+    id('base')
+}
+
+tasks.register("dummy", DummyTask) {
+    dummyOut.set(file("${buildDir}/out"))
+}
+
+class DummyTask extends DefaultTask {
+    @OutputDirectory
+    public DirectoryProperty dummyOut = project.objects.directoryProperty()
+
+    @TaskAction
+    public void doSomething() {
+        def outFile = dummyOut.file("dummy").get().getAsFile()
+        outFile.getParentFile().mkdirs()
+        outFile << "foo"
+    }
+}
