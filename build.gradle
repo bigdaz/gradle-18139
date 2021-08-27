@@ -6,6 +6,7 @@ tasks.register("dummy", DummyTask) {
     dummyOut.set(file("${buildDir}/out"))
 }
 
+@CacheableTask
 class DummyTask extends DefaultTask {
     @OutputDirectory
     public DirectoryProperty dummyOut = project.objects.directoryProperty()
